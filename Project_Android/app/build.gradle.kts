@@ -51,6 +51,16 @@ android {
                 )
             )
         )
+        buildConfigField(
+            "String",
+            "GEMINI_API_KEY",
+            buildConfigString(localProperties.getProperty("GEMINI_API_KEY", ""))
+        )
+        buildConfigField(
+            "String",
+            "GEMINI_MODEL",
+            buildConfigString(localProperties.getProperty("GEMINI_MODEL", "gemini-2.5-flash"))
+        )
     }
 
     buildTypes {
@@ -85,6 +95,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.sun.mail:android-mail:1.6.8")
     implementation("com.sun.mail:android-activation:1.6.8")
     testImplementation(libs.junit)

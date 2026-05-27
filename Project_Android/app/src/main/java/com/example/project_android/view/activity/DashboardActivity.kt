@@ -137,7 +137,8 @@ class DashboardActivity : AppCompatActivity() {
             loadingMessage = if (showToast) "\u0110ang t\u1ea3i dashboard..." else null,
             request = { ApiClient.get("/reports/dashboard") }
         ) { result ->
-            renderDashboard(JSONObject(result.body).getJSONObject("data"))
+            val data = JSONObject(result.body).getJSONObject("data")
+            renderDashboard(data)
             if (showToast) {
                 Toast.makeText(this, "\u0110\u00e3 c\u1eadp nh\u1eadt dashboard", Toast.LENGTH_SHORT).show()
             }
