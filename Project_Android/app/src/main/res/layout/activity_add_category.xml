@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="110dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="18dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="140dp">
+
+            <!-- Header: cùng style với màn Thêm sản phẩm -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Quay lại"
+                    android:src="@drawable/ic_arrow_back"
+                    android:tint="@color/text_primary" />
+
+                <TextView
+                    android:id="@+id/tvHeaderTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Thêm danh mục"
+                    android:textColor="@color/brand_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btnAdminAvatar"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/bg_circle_avatar"
+                    android:contentDescription="Tài khoản quản trị"
+                    android:padding="6dp"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:tint="@android:color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <!-- Bỏ icon camera nổi, chỉ giữ 1 icon trong khung -->
+                <FrameLayout
+                    android:id="@+id/btnPickCategoryImage"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp">
+
+                    <ImageView
+                        android:id="@+id/imgCategoryIcon"
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
+                        android:background="@drawable/bg_category_photo_box"
+                        android:padding="42dp"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:tint="@color/brand_primary" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:letterSpacing="0.08"
+                    android:text="BIỂU TƯỢNG DANH MỤC"
+                    android:textColor="@color/text_label"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="58dp"
+                android:letterSpacing="0.12"
+                android:text="TÊN DANH MỤC"
+                android:textColor="@color/text_label"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtCategoryName"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_input_rounded"
+                android:hint="Ví dụ: Giày cao gót"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:paddingHorizontal="18dp"
+                android:singleLine="true"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/hint_color_emphasis"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="34dp"
+                android:letterSpacing="0.12"
+                android:text="MÔ TẢ"
+                android:textColor="@color/text_label"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtCategoryDescription"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_input_rounded"
+                android:gravity="top"
+                android:hint="Nhập chi tiết về danh mục sản phẩm này..."
+                android:inputType="textMultiLine|textCapSentences"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="16dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/hint_color_emphasis"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/screen_background"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="26dp">
+
+        <LinearLayout
+            android:id="@+id/btnSaveCategory"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@drawable/bg_button_create_customer"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- Icon đổi sang ngữ nghĩa danh mục -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lưu danh mục"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

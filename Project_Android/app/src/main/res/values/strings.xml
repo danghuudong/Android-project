@@ -1,0 +1,50 @@
+﻿<resources>
+    <string name="app_name">Project_Android</string>
+
+    <string name="payment_detail_title">Chi tiết đơn thuê</string>
+    <string name="payment_detail_order_code">ORD-8924</string>
+    <string name="payment_detail_status_label">TRẠNG THÁI</string>
+    <string name="payment_detail_status_renting">Đang thuê</string>
+    <string name="payment_detail_customer_tier">VVIP</string>
+    <string name="payment_detail_confirm_payment">Xác nhận thanh toán</string>
+    <string name="payment_detail_customer_level">VÀNG</string>
+    <string name="payment_detail_customer_name">Eleanor James</string>
+    <string name="payment_detail_customer_phone">0901112222</string>
+    <string name="payment_detail_customer_email">thuha.n@vidu.vn</string>
+    <string name="payment_detail_customer_address">245 Lê Thánh Tôn, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</string>
+
+    <string name="payment_detail_products_title">Sản phẩm thuê</string>
+    <string name="payment_detail_view_detail">Xem chi tiết</string>
+    <string name="payment_detail_product_sku">SKU: DG-EM-092</string>
+    <string name="payment_detail_product_name">Emerald Silk Slip Gown</string>
+    <string name="payment_detail_product_size">SIZE: M</string>
+    <string name="payment_detail_product_material">SILK</string>
+
+    <string name="payment_detail_rent_date_label">NGÀY THUÊ</string>
+    <string name="payment_detail_due_date_label">HẠN TRẢ</string>
+    <string name="payment_detail_time_title">THỜI GIAN THUÊ</string>
+    <string name="payment_detail_return_date_label">NGÀY TRẢ</string>
+    <string name="payment_detail_rent_date">24/10/2023</string>
+    <string name="payment_detail_due_date">28/10/2023</string>
+    <string name="payment_detail_rent_date_today">14/05/2026</string>
+    <string name="payment_detail_choose_return_date">28/10/2023</string>
+
+    <string name="payment_detail_timeline_title">Tiến độ đơn hàng</string>
+    <string name="payment_detail_step_created">✓  Đã tạo đơn</string>
+    <string name="payment_detail_step_created_time">24/10/2023 • 09:30 AM</string>
+    <string name="payment_detail_step_received">✓  Đã nhận đồ</string>
+    <string name="payment_detail_step_received_time">24/10/2023 • 14:15 PM</string>
+    <string name="payment_detail_step_paid">✓  Đã xác nhận thanh toán</string>
+    <string name="payment_detail_step_paid_time">24/10/2023 • 14:15 PM</string>
+    <string name="payment_detail_step_using">●  Khách đang sử dụng</string>
+    <string name="payment_detail_step_using_hint">Dự kiến trả: 28/10/2023</string>
+
+    <string name="payment_detail_summary_title">Chi tiết thanh toán</string>
+    <string name="payment_detail_summary_title_upper">CHI TIẾT THANH TOÁN</string>
+    <string name="payment_detail_rental_fee">Tiền thuê (4 ngày)</string>
+    <string name="payment_detail_rental_fee_value">800.000đ</string>
+    <string name="payment_detail_deposit_fee">Tiền cọc (Hoàn lại)</string>
+    <string name="payment_detail_deposit_fee_value">400.000đ</string>
+    <string name="payment_detail_total">Tổng cộng</string>
+    <string name="payment_detail_total_value">1.200.000đ</string>
+</resources>

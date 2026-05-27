@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Project_Android" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowAnimationStyle">@style/NoActivityAnimation</item>
+    </style>
+
+    <style name="Theme.Project_Android" parent="Base.Theme.Project_Android" />
+
+    <style name="NoActivityAnimation">
+        <item name="android:activityOpenEnterAnimation">@anim/no_animation</item>
+        <item name="android:activityOpenExitAnimation">@anim/no_animation</item>
+        <item name="android:activityCloseEnterAnimation">@anim/no_animation</item>
+        <item name="android:activityCloseExitAnimation">@anim/no_animation</item>
+        <item name="android:taskOpenEnterAnimation">@anim/no_animation</item>
+        <item name="android:taskOpenExitAnimation">@anim/no_animation</item>
+        <item name="android:taskCloseEnterAnimation">@anim/no_animation</item>
+        <item name="android:taskCloseExitAnimation">@anim/no_animation</item>
+    </style>
+</resources>

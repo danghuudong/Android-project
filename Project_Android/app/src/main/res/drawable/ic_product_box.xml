@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Product/package icon for rented product summary. -->
+    <path
+        android:fillColor="@color/accent_magenta"
+        android:pathData="M12,3.05L4.75,6.45V15.55L12,19.05L19.25,15.55V6.45L12,3.05ZM12,5.05L16.8,7.3L12,9.55L7.2,7.3L12,5.05ZM6.55,8.75L11.1,10.88V16.65L6.55,14.45V8.75ZM12.9,16.65V10.88L17.45,8.75V14.45L12.9,16.65Z" />
+    <path
+        android:fillColor="@color/accent_magenta"
+        android:pathData="M8.6,6.15L15.3,9.35V11.95C15.3,12.35 14.97,12.68 14.57,12.68C14.17,12.68 13.85,12.35 13.85,11.95V10.25L7.85,7.4L8.6,6.15Z" />
+</vector>

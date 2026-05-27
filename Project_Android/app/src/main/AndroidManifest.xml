@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Project_Android">
+        <activity android:name=".view.activity.AddDiscountCodeActivity" android:exported="false" />
+        <activity android:name=".view.activity.DiscountCodeDetailActivity" android:exported="false" />
+        <activity android:name=".view.activity.DiscountCodeActivity" android:exported="false" />
+        <activity android:name=".view.activity.AddCategoryActivity" android:exported="false" />
+        <activity android:name=".view.activity.CategoryManagementActivity" android:exported="false" />
+        <activity android:name=".view.activity.CategoryDetailActivity" android:exported="false" />
+        <activity android:name=".view.activity.ProductDetailActivity" android:exported="false" />
+        <activity android:name=".view.activity.AddCustomerActivity" android:exported="false" />
+        <activity android:name=".view.activity.CustomerDetailActivity" android:exported="false" />
+        <activity android:name=".view.activity.ReturnProcessActivity" android:exported="false" />
+        <activity android:name=".view.activity.OrderDetailActivity" android:exported="false" />
+        <activity android:name=".view.activity.PaymentDetailActivity" android:exported="false" />
+        <activity android:name=".view.activity.OrderActivity" android:exported="false" />
+        <activity android:name=".view.activity.DashboardActivity" android:exported="false" />
+        <activity android:name=".view.activity.CustomerActivity" android:exported="false" />
+        <activity android:name=".view.activity.CreateOrderActivity" android:exported="false" />
+        <activity android:name=".view.activity.AddProductActivity" android:exported="false" />
+        <activity android:name=".view.activity.ProductActivity" android:exported="false" />
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.project_android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>

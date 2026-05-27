@@ -1,0 +1,459 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:paddingBottom="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:tint="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Xử lý trả hàng"
+                    android:textColor="@color/brand_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btnAdminAvatar"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/bg_circle_avatar"
+                    android:contentDescription="Tài khoản quản trị"
+                    android:padding="6dp"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:tint="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Order info -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_form_card"
+                android:baselineAligned="false"
+                android:gravity="top"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/ivReturnProductImage"
+                    android:layout_width="118dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:background="@drawable/bg_product_image_box"
+                    android:minHeight="178dp"
+                    android:padding="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_myplaces" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvReturnOrderCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_status_ready"
+                            android:breakStrategy="simple"
+                            android:gravity="start|center_vertical"
+                            android:maxLines="2"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="7dp"
+                            android:text="ĐƠN #ORD-7742"
+                            android:textColor="@color/brand_primary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:minWidth="16dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tvReturnLateStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_pink"
+                            android:gravity="center"
+                            android:minWidth="82dp"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="7dp"
+                            android:text="TRẢ MUỘN"
+                            android:textColor="@color/accent_magenta"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvReturnProductName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:breakStrategy="simple"
+                        android:lineSpacingExtra="2dp"
+                        android:maxLines="3"
+                        android:text="Midnight Silk Halter Gown"
+                        android:textColor="@color/text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="88dp"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="1dp"
+                                android:text="Người thuê"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvReturnCustomerName"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:breakStrategy="simple"
+                                android:maxLines="2"
+                                android:text="Eleanor Vance"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:gravity="top"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="88dp"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="1dp"
+                                android:text="Ngày thuê"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvReturnPickupDate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:maxLines="1"
+                                android:text="12/05/2026"
+                                android:textColor="@color/brand_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:gravity="top"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvReturnDueDateLabel"
+                                android:layout_width="88dp"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="1dp"
+                                android:text="Hạn trả"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvReturnDueDate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:breakStrategy="simple"
+                                android:lineSpacingExtra="2dp"
+                                android:maxLines="3"
+                                android:text="24 thg 10, 2023 (Trễ 2 ngày)"
+                                android:textColor="@color/accent_magenta"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Condition title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Đánh giá tình trạng"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Condition option 1 -->
+            <LinearLayout
+                android:id="@+id/optionNormal"
+                android:layout_width="match_parent"
+                android:layout_height="142dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_condition_selected"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:id="@+id/iconNormal"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_condition_icon_neutral"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_condition_check"
+                    android:tint="@color/brand_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Bình thường"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Sẵn sàng để giặt ủi và lưu trữ."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Condition option 2 -->
+            <LinearLayout
+                android:id="@+id/optionDirty"
+                android:layout_width="match_parent"
+                android:layout_height="138dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_condition_card"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:id="@+id/iconDirty"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_condition_icon_neutral"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_condition_drop"
+                    android:tint="@color/brand_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Quá bẩn / Hư hỏng"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Cần xử lý vệ sinh, sửa chữa hoặc bồi thường một phần."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Condition option 3 -->
+            <LinearLayout
+                android:id="@+id/optionLost"
+                android:layout_width="match_parent"
+                android:layout_height="138dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_condition_card"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:id="@+id/iconLost"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_condition_icon_damaged"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_condition_damage"
+                    android:tint="@color/accent_magenta" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Mất đồ"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Khách làm mất sản phẩm hoặc thiếu món không thu hồi được."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Financial summary -->
+            <LinearLayout
+                android:id="@+id/financialSummaryCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/bg_financial_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tóm tắt tài chính"
+                    android:textColor="@color/text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPenaltyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="PHÍ PHẠT TÍNH TOÁN"
+                    android:textColor="@color/text_label"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtPenaltyAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_financial_field_emphasis"
+                    android:gravity="center_vertical"
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="14dp"
+                    android:hint="0.00"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvPenaltyHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Bao gồm 50$ phí trễ hạn + Phí sửa chữa cơ bản"
+                    android:textColor="@color/accent_magenta"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="GHI CHÚ KIỂM TRA (TÙY CHỌN)"
+                    android:textColor="@color/text_label"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtReturnNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_financial_field_emphasis"
+                    android:gravity="top"
+                    android:hint="Mô tả chi tiết các vết bẩn hoặc hư hỏng..."
+                    android:padding="14dp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/hint_color_emphasis"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConfirmReturn"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/bg_return_confirm_button"
+                android:backgroundTint="@null"
+                android:text="Xác nhận trả hàng"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
