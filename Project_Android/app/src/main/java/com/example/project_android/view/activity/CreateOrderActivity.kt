@@ -409,13 +409,13 @@ class CreateOrderActivity : AppCompatActivity() {
         val phone = customer.optString("phone", "")
         val id = customer.optString("id", customer.optString("_id", ""))
         val status = customer.optString("status", "active")
-        val dressSize = customer.optString("dressSize", "").ifEmpty { "--" }
+        val dressSize = customer.optString("dressShirtSize", customer.optString("dressSize", "")).ifEmpty { "--" }
         val shoeSize = customer.optString("shoeSize", "").ifEmpty { "--" }
 
         itemView.findViewById<TextView>(R.id.tvName).text = name
         itemView.findViewById<TextView>(R.id.tvEmail).text = email
         itemView.findViewById<TextView>(R.id.tvPhone).text = phone
-        itemView.findViewById<TextView>(R.id.tvDressSize).text = "KICH CO: $dressSize"
+        itemView.findViewById<TextView>(R.id.tvDressSize).text = "VAY/AO: $dressSize"
         itemView.findViewById<TextView>(R.id.tvShoeSize).text = "GIAY: $shoeSize"
         itemView.findViewById<ImageView>(R.id.btnDelete).visibility = View.GONE
         val avatar = itemView.findViewById<ImageView>(R.id.imgCustomerAvatar)

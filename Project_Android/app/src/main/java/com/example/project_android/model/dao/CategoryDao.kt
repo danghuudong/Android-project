@@ -81,10 +81,7 @@ class CategoryDao(private val db: SQLiteDatabase) {
 
             // E2E SYNC: user doi ten danh muc -> products.category doi theo -> product list/filter/detail khong bi lech.
             if (affected > 0 && oldName != name) {
-                db.update(DatabaseContract.Products.TABLE, ContentValues().apply {
-                    put("category", name)
-                    put("updatedAt", now)
-                }, "category = ?", arrayOf(oldName))
+                syncProductsToCategoryName(id, oldName, name, now)
             }
 
             db.setTransactionSuccessful()
@@ -118,6 +115,37 @@ class CategoryDao(private val db: SQLiteDatabase) {
             arrayOf(id)
         ).use { cursor ->
             if (cursor.moveToFirst()) cursor.getString(0) else null
+        }
+    }
+
+    private fun syncProductsToCategoryName(categoryId: String, oldName: String, newName: String, now: String) {
+        val whereParts = mutableListOf("category = ?")
+        val args = mutableListOf(oldName)
+
+        demoProductIdPrefixes(categoryId).forEach { prefix ->
+            whereParts.add("id LIKE ?")
+            args.add("${prefix}_%")
+        }
+
+        db.update(
+            DatabaseContract.Products.TABLE,
+            ContentValues().apply {
+                put("category", newName)
+                put("updatedAt", now)
+            },
+            whereParts.joinToString(" OR "),
+            args.toTypedArray()
+        )
+    }
+
+    private fun demoProductIdPrefixes(categoryId: String): List<String> {
+        return when (categoryId) {
+            "cat_dress" -> listOf("p1", "p6", "p8", "p11", "p14", "p16", "p20")
+            "cat_suit" -> listOf("p2", "p7", "p12", "p15")
+            "cat_skirt" -> listOf("p3", "p9", "p17")
+            "cat_coat" -> listOf("p4", "p13", "p18")
+            "cat_blazer" -> listOf("p5", "p10", "p19")
+            else -> emptyList()
         }
     }
 }

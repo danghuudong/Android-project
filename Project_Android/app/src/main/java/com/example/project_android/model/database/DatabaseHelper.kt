@@ -43,6 +43,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
     override fun onOpen(db: SQLiteDatabase) {
         super.onOpen(db)
+        ensureCustomerDressShirtSizeColumn(db)
         ensureDemoCategoryImageUrls(db)
         ensureAdditionalDemoCustomer(db)
         ensureDemoCustomerAvatarUrls(db)
@@ -104,7 +105,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 email TEXT DEFAULT '',
                 address TEXT DEFAULT '',
                 note TEXT DEFAULT '',
-                dressSize TEXT DEFAULT '',
+                dressShirtSize TEXT DEFAULT '',
                 shoeSize TEXT DEFAULT '',
                 avatar TEXT DEFAULT '',
                 status TEXT NOT NULL DEFAULT 'active',
@@ -409,6 +410,75 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         if (!hasSizeColumn) {
             db.execSQL("ALTER TABLE order_products ADD COLUMN size TEXT DEFAULT ''")
+        }
+    }
+
+    private fun ensureCustomerDressShirtSizeColumn(db: SQLiteDatabase) {
+        val columns = db.rawQuery("PRAGMA table_info(customers)", null).use { cursor ->
+            val names = mutableSetOf<String>()
+            while (cursor.moveToNext()) {
+                names.add(cursor.getString(cursor.getColumnIndexOrThrow("name")))
+            }
+            names
+        }
+
+        if ("dressSize" !in columns && "dressShirtSize" in columns) return
+
+        db.beginTransaction()
+        try {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS customers_new (
+                    id TEXT PRIMARY KEY,
+                    fullName TEXT NOT NULL,
+                    phone TEXT NOT NULL,
+                    email TEXT DEFAULT '',
+                    address TEXT DEFAULT '',
+                    note TEXT DEFAULT '',
+                    dressShirtSize TEXT DEFAULT '',
+                    shoeSize TEXT DEFAULT '',
+                    avatar TEXT DEFAULT '',
+                    status TEXT NOT NULL DEFAULT 'active',
+                    createdAt TEXT NOT NULL,
+                    updatedAt TEXT NOT NULL
+                )
+                """.trimIndent()
+            )
+
+            val sizeExpression = when {
+                "dressShirtSize" in columns && "dressSize" in columns ->
+                    "COALESCE(NULLIF(dressShirtSize, ''), dressSize, '')"
+                "dressShirtSize" in columns -> "dressShirtSize"
+                "dressSize" in columns -> "dressSize"
+                else -> "''"
+            }
+
+            db.execSQL(
+                """
+                INSERT OR REPLACE INTO customers_new
+                    (id, fullName, phone, email, address, note, dressShirtSize, shoeSize, avatar, status, createdAt, updatedAt)
+                SELECT
+                    id,
+                    fullName,
+                    phone,
+                    COALESCE(email, ''),
+                    COALESCE(address, ''),
+                    COALESCE(note, ''),
+                    $sizeExpression,
+                    COALESCE(shoeSize, ''),
+                    COALESCE(avatar, ''),
+                    COALESCE(status, 'active'),
+                    createdAt,
+                    updatedAt
+                FROM customers
+                """.trimIndent()
+            )
+            db.execSQL("DROP TABLE customers")
+            db.execSQL("ALTER TABLE customers_new RENAME TO customers")
+            db.execSQL("CREATE INDEX IF NOT EXISTS idx_customers_phone ON customers(phone)")
+            db.setTransactionSuccessful()
+        } finally {
+            db.endTransaction()
         }
     }
 
@@ -748,9 +818,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         db.execSQL(
             """
             INSERT OR IGNORE INTO customers
-                (id, fullName, phone, email, address, note, dressSize, shoeSize, avatar, status, createdAt, updatedAt)
+                (id, fullName, phone, email, address, note, dressShirtSize, shoeSize, avatar, status, createdAt, updatedAt)
             VALUES
-                ('c5', 'Tráº§n Lan Anh', '0909990000', 'lananh.t@vidu.vn', 'Ho Chi Minh City', 'Sang trá»ng', 'M', '37', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face', 'active', ?, ?)
+                ('c5', 'Trần Lan Anh', '0909990000', 'lananh.t@vidu.vn', 'Ho Chi Minh City', 'Sang trọng', 'M', '37', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face', 'active', ?, ?)
             """.trimIndent(),
             arrayOf(now, now)
         )
@@ -797,7 +867,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 WHERE id = ?
                   AND (
                       iconUri = ''
-                      OR iconUri LIKE 'content://%'
                       OR iconUri LIKE 'https://images.unsplash.com/%'
                   )
                 """.trimIndent(),
@@ -869,6 +938,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 arrayOf(fullName, email, now, id)
             )
         }
+
+        db.execSQL(
+            """
+            UPDATE customers
+            SET note = 'Sang trọng', updatedAt = ?
+            WHERE note = 'Sang trá»ng'
+            """.trimIndent(),
+            arrayOf(now)
+        )
 
         val orderCustomers = listOf(
             "0901112222" to "Nguyễn Thị Thu Hà",

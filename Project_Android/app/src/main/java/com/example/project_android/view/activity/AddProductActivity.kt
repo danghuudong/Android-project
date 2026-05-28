@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.project_android.navigation.AdminAvatarController
 import com.example.project_android.network.ApiClient
 import com.example.project_android.network.runApi
+import com.example.project_android.utils.ImageUtils
 import org.json.JSONObject
 import android.view.View
 import android.app.AlertDialog
@@ -54,23 +55,7 @@ class AddProductActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
             mainImageUri = copyProductImageToAppStorage(uri)
-            
-            val imgView = uploadMainImage.getChildAt(0) as ImageView
-            val tvUpload = uploadMainImage.getChildAt(1) as TextView
-            
-            imgView.setImageURI(mainImageUri)
-            imgView.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-            imgView.scaleType = ImageView.ScaleType.CENTER_CROP
-            imgView.imageTintList = null
-            imgView.clearColorFilter()
-            imgView.setPadding(0, 0, 0, 0)
-            imgView.clipToOutline = true
-            
-            tvUpload.visibility = View.GONE
-            uploadMainImage.setPadding(0, 0, 0, 0)
+            renderProductImage(mainImageUri.toString())
         }
     }
 
@@ -274,28 +259,29 @@ class AddProductActivity : AppCompatActivity() {
             val imageUrl = data.optString("imageUrl", "")
             if (imageUrl.isNotEmpty()) {
                 mainImageUri = Uri.parse(imageUrl)
-                val imgView = uploadMainImage.getChildAt(0) as ImageView
-                val tvUpload = uploadMainImage.getChildAt(1) as TextView
-                
-                try {
-                    imgView.setImageURI(mainImageUri)
-                    imgView.layoutParams = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                    )
-                    imgView.scaleType = ImageView.ScaleType.CENTER_CROP
-                    imgView.imageTintList = null
-                    imgView.clearColorFilter()
-                    imgView.setPadding(0, 0, 0, 0)
-                    imgView.clipToOutline = true
-                    
-                    tvUpload.visibility = View.GONE
-                    uploadMainImage.setPadding(0, 0, 0, 0)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                renderProductImage(imageUrl)
             }
         }
+    }
+
+    private fun renderProductImage(imageUrl: String) {
+        val imgView = uploadMainImage.getChildAt(0) as ImageView
+        val tvUpload = uploadMainImage.getChildAt(1) as TextView
+
+        imgView.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+        imgView.scaleType = ImageView.ScaleType.CENTER_CROP
+        imgView.imageTintList = null
+        imgView.clearColorFilter()
+        imgView.setPadding(0, 0, 0, 0)
+        imgView.clipToOutline = true
+
+        tvUpload.visibility = View.GONE
+        uploadMainImage.setPadding(0, 0, 0, 0)
+
+        ImageUtils.bindImage(imgView, imageUrl, android.R.drawable.ic_menu_camera)
     }
 
     private fun copyProductImageToAppStorage(sourceUri: Uri): Uri {

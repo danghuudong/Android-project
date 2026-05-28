@@ -13,6 +13,9 @@ import com.example.project_android.R
 import com.example.project_android.model.dao.CategoryDao
 import com.example.project_android.model.database.DatabaseHelper
 import com.example.project_android.navigation.AdminAvatarController
+import com.example.project_android.utils.ImageUtils
+import java.io.File
+import java.util.UUID
 
 class AddCategoryActivity : AppCompatActivity() {
 
@@ -40,11 +43,8 @@ class AddCategoryActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        selectedIconUri = uri
-        imgCategoryIcon.setImageURI(uri)
-        imgCategoryIcon.imageTintList = null
-        imgCategoryIcon.clearColorFilter()
-        imgCategoryIcon.setPadding(0, 0, 0, 0)
+        selectedIconUri = copyCategoryImageToAppStorage(uri)
+        renderCategoryImage(selectedIconUri.toString())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,13 +78,36 @@ class AddCategoryActivity : AppCompatActivity() {
         if (iconUriStr.isNotBlank()) {
             try {
                 selectedIconUri = Uri.parse(iconUriStr)
-                imgCategoryIcon.setImageURI(selectedIconUri)
-                imgCategoryIcon.imageTintList = null
-                imgCategoryIcon.clearColorFilter()
-                imgCategoryIcon.setPadding(0, 0, 0, 0)
+                renderCategoryImage(iconUriStr)
             } catch (e: Exception) {
                 // Keep default icon
             }
+        }
+    }
+
+    private fun renderCategoryImage(iconUri: String) {
+        imgCategoryIcon.imageTintList = null
+        imgCategoryIcon.clearColorFilter()
+        imgCategoryIcon.setPadding(0, 0, 0, 0)
+        imgCategoryIcon.scaleType = ImageView.ScaleType.CENTER_CROP
+        ImageUtils.bindImage(imgCategoryIcon, iconUri, android.R.drawable.ic_menu_camera)
+    }
+
+    private fun copyCategoryImageToAppStorage(sourceUri: Uri): Uri {
+        return try {
+            val imageDir = File(filesDir, "category_images").apply { mkdirs() }
+            val imageFile = File(imageDir, "${UUID.randomUUID()}.jpg")
+
+            contentResolver.openInputStream(sourceUri)?.use { input ->
+                imageFile.outputStream().use { output ->
+                    input.copyTo(output)
+                }
+            } ?: return sourceUri
+
+            Uri.fromFile(imageFile)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            sourceUri
         }
     }
 

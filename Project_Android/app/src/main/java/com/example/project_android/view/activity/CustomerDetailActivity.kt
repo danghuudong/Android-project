@@ -229,7 +229,7 @@ class CustomerDetailActivity : AppCompatActivity() {
                 orientation = LinearLayout.HORIZONTAL
             }
             addView(row, matchWrap(top = 24))
-            val viewDressSize = sizeBox("SIZE VÁY", "--") as LinearLayout
+            val viewDressSize = sizeBox("SIZE VÁY/ÁO", "--") as LinearLayout
             tvDressSize = viewDressSize.getChildAt(1) as TextView
             row.addView(viewDressSize, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
                 marginEnd = dp(10)
@@ -328,8 +328,8 @@ class CustomerDetailActivity : AppCompatActivity() {
         tvEmail.text = customerEmail.ifBlank { "Chưa có" }
         tvPhone.text = customerPhone.ifBlank { "Chưa có" }
         tvAddress.text = customer.optString("address").ifBlank { "Chưa có" }
-        tvNote.text = customer.optString("note").ifBlank { "Không có ghi chú" }
-        tvDressSize.text = customer.optString("dressSize").ifBlank { "--" }
+        tvNote.text = normalizeVietnameseNote(customer.optString("note")).ifBlank { "Không có ghi chú" }
+        tvDressSize.text = customer.optString("dressShirtSize", customer.optString("dressSize")).ifBlank { "--" }
         tvShoeSize.text = customer.optString("shoeSize").ifBlank { "--" }
 
         if (CustomerImageUtils.bindAvatar(
@@ -734,6 +734,16 @@ class CustomerDetailActivity : AppCompatActivity() {
             "renting" -> "ĐANG THUÊ"
             else -> "TRONG HẠN"
         }
+    }
+
+    private fun normalizeVietnameseNote(value: String): String {
+        return value
+            .replace("Tá»‘i giáº£n", "Tối giản")
+            .replace("Sang trá»ng", "Sang trọng")
+            .replace("Cá»• Ä‘iá»ƒn", "Cổ điển")
+            .replace("Hiá»‡n Ä‘áº¡i", "Hiện đại")
+            .replace("CÃ¡ tÃ­nh", "Cá tính")
+            .replace("KhÃ´ng cÃ³ ghi chÃº", "Không có ghi chú")
     }
 
     private fun formatDate(value: String): String {

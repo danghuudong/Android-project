@@ -28,7 +28,6 @@ class AddCustomerActivity : AppCompatActivity() {
     private lateinit var edtPhone: EditText
     private lateinit var edtEmail: EditText
     private lateinit var edtAddress: EditText
-    private lateinit var edtAvatarUrl: EditText
     private lateinit var edtCustomStyle: EditText
     private lateinit var spinnerDressSize: Spinner
     private lateinit var edtShoeSize: EditText
@@ -59,7 +58,6 @@ class AddCustomerActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
             avatarUri = uri
-            edtAvatarUrl.setText(uri.toString())
             imgAvatar.setImageURI(uri)
             // Xóa tint và padding khi đã có ảnh thật
             imgAvatar.imageTintList = null
@@ -98,7 +96,7 @@ class AddCustomerActivity : AppCompatActivity() {
             edtEmail.setText(customer.optString("email"))
             edtAddress.setText(customer.optString("address"))
 
-            val dressSize = customer.optString("dressSize")
+            val dressSize = customer.optString("dressShirtSize", customer.optString("dressSize"))
             val dressSizes = arrayOf("XS", "S", "M", "L", "XL")
             val index = dressSizes.indexOf(dressSize)
             if (index >= 0) spinnerDressSize.setSelection(index)
@@ -129,7 +127,6 @@ class AddCustomerActivity : AppCompatActivity() {
             }
 
             val avatarStr = customer.optString("avatar", "")
-            edtAvatarUrl.setText(avatarStr)
             avatarUri = avatarStr.takeIf { it.isNotBlank() }?.let { Uri.parse(it) }
             if (CustomerImageUtils.bindAvatar(
                     imgAvatar,
@@ -151,7 +148,6 @@ class AddCustomerActivity : AppCompatActivity() {
         edtPhone = findViewById(R.id.edtPhone)
         edtEmail = findViewById(R.id.edtEmail)
         edtAddress = findViewById(R.id.edtAddress)
-        edtAvatarUrl = findViewById(R.id.edtAvatarUrl)
         edtCustomStyle = findViewById(R.id.edtCustomStyle)
         spinnerDressSize = findViewById(R.id.spinnerDressSize)
         edtShoeSize = findViewById(R.id.edtShoeSize)
@@ -179,10 +175,6 @@ class AddCustomerActivity : AppCompatActivity() {
         // Upload avatar - mở thư viện ảnh
         findViewById<android.view.View>(R.id.btnUploadAvatar).setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
-        }
-
-        edtAvatarUrl.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) previewAvatarUrl()
         }
 
         // Style chips toggle
@@ -215,7 +207,6 @@ class AddCustomerActivity : AppCompatActivity() {
         val phone = edtPhone.text.toString().trim()
         val email = edtEmail.text.toString().trim()
         val address = edtAddress.text.toString().trim()
-        val avatarUrl = edtAvatarUrl.text.toString().trim()
 
         if (fullName.isEmpty()) return showFieldError(edtFullName, "Vui lòng nhập họ và tên")
         if (phone.isEmpty()) return showFieldError(edtPhone, "Vui lòng nhập số điện thoại")
@@ -236,9 +227,9 @@ class AddCustomerActivity : AppCompatActivity() {
             put("email", email)
             put("address", address)
             put("note", finalNote)
-            put("dressSize", dressSize)
+            put("dressShirtSize", dressSize)
             put("shoeSize", shoeSize)
-            put("avatar", avatarUrl.ifBlank { avatarUri?.toString() ?: "" })
+            put("avatar", avatarUri?.toString() ?: "")
         }
 
         if (editCustomerId != null) {
@@ -275,16 +266,4 @@ class AddCustomerActivity : AppCompatActivity() {
         field.requestFocus()
     }
 
-    private fun previewAvatarUrl() {
-        val avatarUrl = edtAvatarUrl.text.toString().trim()
-        if (avatarUrl.isBlank()) return
-
-        avatarUri = Uri.parse(avatarUrl)
-        if (CustomerImageUtils.bindAvatar(imgAvatar, avatarUrl)) {
-            imgAvatar.imageTintList = null
-            imgAvatar.clearColorFilter()
-            imgAvatar.setPadding(0, 0, 0, 0)
-            imgAvatar.clipToOutline = true
-        }
-    }
 }

@@ -121,7 +121,7 @@ class CustomerActivity : AppCompatActivity() {
                 val email = customer.optString("email", "")
                 val phone = customer.optString("phone", "")
                 val status = customer.optString("status", "active")
-                val dressSize = customer.optString("dressSize", "").ifEmpty { "--" }
+                val dressSize = customer.optString("dressShirtSize", customer.optString("dressSize", "")).ifEmpty { "--" }
                 val shoeSize = customer.optString("shoeSize", "").ifEmpty { "--" }
                 val avatarStr = customer.optString("avatar", "")
                 
@@ -130,7 +130,7 @@ class CustomerActivity : AppCompatActivity() {
                 itemView.findViewById<android.widget.TextView>(R.id.tvName).text = name
                 itemView.findViewById<android.widget.TextView>(R.id.tvEmail).text = email
                 itemView.findViewById<android.widget.TextView>(R.id.tvPhone).text = phone
-                itemView.findViewById<android.widget.TextView>(R.id.tvDressSize).text = "KÍCH CỠ: $dressSize"
+                itemView.findViewById<android.widget.TextView>(R.id.tvDressSize).text = "VÁY/ÁO: $dressSize"
                 itemView.findViewById<android.widget.TextView>(R.id.tvShoeSize).text = "GIÀY: $shoeSize"
 
                 val imgCustomerAvatar = itemView.findViewById<android.widget.ImageView>(R.id.imgCustomerAvatar)

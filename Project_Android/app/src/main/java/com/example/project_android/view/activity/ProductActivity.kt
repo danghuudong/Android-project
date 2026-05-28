@@ -537,7 +537,6 @@ class ProductActivity : AppCompatActivity() {
 
             addView(createProductImageSection(product, status, quantity))
             addView(createProductInfoRow(product, status, quantity))
-            addView(createSizeChip(product.optString("size", "")))
         }
     }
 
@@ -632,18 +631,32 @@ class ProductActivity : AppCompatActivity() {
             setPadding(0, dp(12), dp(14), 0)
 
             addView(View(this@ProductActivity).apply {
-                layoutParams = LinearLayout.LayoutParams(dp(3), dp(70)).apply {
+                layoutParams = LinearLayout.LayoutParams(dp(3), dp(78)).apply {
                     marginEnd = dp(10)
                 }
                 setBackgroundResource(if (status == "available") R.drawable.bg_product_status_ready_bar else R.drawable.bg_product_status_laundry_bar)
             })
 
-            addView(TextView(this@ProductActivity).apply {
-                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            addView(LinearLayout(this@ProductActivity).apply {
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                    marginEnd = dp(10)
+                }
+                orientation = LinearLayout.VERTICAL
+
+                addView(TextView(this@ProductActivity).apply {
                 text = product.optString("name", "Sản phẩm")
                 setTextColor(getColor(R.color.text_primary))
                 textSize = 16f
-                setTypeface(typeface, Typeface.BOLD)
+                    setTypeface(typeface, Typeface.BOLD)
+                    maxLines = 2
+                })
+
+                addView(createSizeChip(product.optString("size", "")), LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = dp(20)
+                })
             })
 
             addView(LinearLayout(this@ProductActivity).apply {
@@ -684,7 +697,13 @@ class ProductActivity : AppCompatActivity() {
                     })
                 })
 
-                addView(createStockChip(quantity))
+                addView(createStockChip(quantity), LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = dp(20)
+                    gravity = Gravity.END
+                })
             })
         }
     }
@@ -694,10 +713,7 @@ class ProductActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                marginStart = dp(13)
-                topMargin = -dp(24)
-            }
+            )
             setBackgroundResource(R.drawable.bg_size_chip)
             setPadding(dp(10), dp(5), dp(10), dp(5))
             text = "KÍCH CỠ $size"
@@ -711,9 +727,7 @@ class ProductActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                topMargin = dp(10)
-            }
+            )
             setBackgroundResource(if (quantity > 0) R.drawable.bg_status_ready else R.drawable.bg_status_neutral)
             setPadding(dp(10), dp(5), dp(10), dp(5))
             text = if (quantity > 0) "CÒN $quantity SẢN PHẨM" else "HẾT HÀNG"
